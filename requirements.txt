@@ -13,3 +13,4 @@ black
 isort
 tox
 coverage
+sympy
