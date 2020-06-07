@@ -13,4 +13,6 @@ black
 isort
 tox
 coverage
-sympy
+sympy==1.6
+matplotlib
+jupyter
