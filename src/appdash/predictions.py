@@ -34,13 +34,17 @@ def preds(fit, cyl_enc, disp, qsec, am, cyl):
     return str(round(pred, 2))
 
 
-import requests
+# import requests
+#
+# file_name = "dpc-covid19-ita-regioni.json"
+# url = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/" + file_name
+# r = requests.get(url)
+# with open("../../data/"+file_name , 'wb') as f:
+#     f.write(r.content)
+#
+# data = pd.read_json(file_name)
+# print(data)
 
-file_name = "dpc-covid19-ita-regioni-latest.json"
-url = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/" + file_name
-r = requests.get(url)
-with open(file_name , 'wb') as f:
-    f.write(r.content)
 
 # load our data
 mtcars = pd.read_csv(
