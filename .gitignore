@@ -2,3 +2,4 @@
 .tox/
 .coverage
 */__pycache/
+*.ipynb_checkpoints/
