@@ -16,3 +16,4 @@ coverage
 sympy==1.6
 matplotlib
 jupyter
+requests
