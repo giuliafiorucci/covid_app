@@ -2,13 +2,32 @@ import dash_core_components as dcc
 import dash_html_components as html
 import dash_daq as daq
 import numpy as np
+
 from src.appdash.predictions import mtcars
+
+
+def make_display_block_div(content):
+    return html.Div(content, style={"display": "inline-block",},)
+
+
+def make_text_align_center_div(content):
+    return html.Div(content, style={"text-align": "center",},)
+
+
+def make_centered_div(content):
+    inner_div = make_display_block_div(content)
+    outer_div = make_text_align_center_div(inner_div)
+    return outer_div
+
+
+def make_layout_centered(go_figure):
+    return make_centered_div([dcc.Graph(figure=go_figure)])
+
 
 # I compute these up front to avoid having to
 # calculate thes twice
 unq_cyl = np.sort(mtcars["cyl"].unique().astype(int)).astype(str)
 opts_cyl = [{"label": i, "value": str(i)} for i in unq_cyl]
-
 
 layout_left_aligned = html.Div(
     [
