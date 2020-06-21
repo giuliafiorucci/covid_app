@@ -1,6 +1,6 @@
 .idea/
 .tox/
 .coverage
-*/__pycache__/
+__pycache__/
 *.ipynb_checkpoints/
 data_lfs/
