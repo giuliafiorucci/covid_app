@@ -3,7 +3,6 @@ dash-renderer
 dash-daq
 flask
 plotly
-gunicorn
 numpy
 pandas
 scikit-learn
@@ -15,5 +14,6 @@ tox
 coverage
 sympy==1.6
 matplotlib
+seaborn
 jupyter
 requests
