@@ -6,15 +6,7 @@ plotly
 numpy
 pandas
 scikit-learn
-pytest
-flake8
-black
-isort
-tox
-coverage
-sympy==1.6
 matplotlib
 seaborn
-jupyter
 requests
 descartes

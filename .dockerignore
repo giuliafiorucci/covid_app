@@ -1,0 +1,17 @@
+.idea/
+.tox
+.coverage
+.coverage.*
+.cache
+.git
+*.ipynb_checkpoints/
+data_lfs
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+nosetests.xml
+coverage.xml
+*,cover
+*.log
+

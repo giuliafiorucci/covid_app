@@ -1,0 +1,6 @@
+pytest
+flake8>=3.8.0a2
+black
+isort
+tox
+coverage
