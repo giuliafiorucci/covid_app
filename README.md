@@ -9,7 +9,7 @@ conda activate geo_env
 conda config --env --add channels conda-forge
 conda config --env --set channel_priority strict
 conda config --env --add channels conda-forge
-conda install python=3 geopandas
+conda install -y python=3 geopandas
 conda install -y pyshp
 conda install -y --file ./requirements.txt
 
