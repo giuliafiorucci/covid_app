@@ -83,4 +83,5 @@ app.layout = make_layout_centered(fig)
 
 # for running the app
 if __name__ == "__main__":
-    app.server.run(debug=False)
+    import os
+    app.server.run(debug=False, port=os.getenv("PORT", 5000))
