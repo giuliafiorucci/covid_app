@@ -83,4 +83,4 @@ app.layout = make_layout_centered(fig)
 
 # for running the app
 if __name__ == "__main__":
-    app.server.run(debug=True)
+    app.server.run(debug=False)
