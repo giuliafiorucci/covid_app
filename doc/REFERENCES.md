@@ -11,6 +11,10 @@
 ## Deploy
 - https://code.visualstudio.com/docs/containers/quickstart-python
 - https://devcenter.heroku.com/articles/container-registry-and-runtime
+- https://alex.dzyoba.com/blog/python-import/
+- https://stackoverflow.com/questions/11087682/does-gunicorn-run-on-windows
+- https://stackoverflow.com/questions/45124711/why-cant-i-connect-to-my-local-docker-compose-container-on-windows-10
+- https://dev.to/riverfount/dockerize-a-flask-app-17ag
 
 ## Plotly and Geopandas
 - https://plotly.com/python/choropleth-maps/
