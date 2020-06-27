@@ -35,8 +35,8 @@ app = dash.Dash(
 )
 app.title = "Visualise Stuff"
 
-
-MAPBOX_API_KEY = os.getenv("MAPBOX_TOKEN", None)
+with open(".mapbox_token", "r") as mapbox_file:
+    MAPBOX_API_KEY = mapbox_file.read()
 
 # fig = px.choropleth_mapbox(
 #     df,
@@ -83,5 +83,4 @@ app.layout = make_layout_centered(fig)
 
 # for running the app
 if __name__ == "__main__":
-    import os
-    app.server.run(debug=False, port=os.getenv("PORT", 5000))
+    app.server.run(host="0.0.0.0")
