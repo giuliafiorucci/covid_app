@@ -14,4 +14,4 @@ ADD . /app/
 FROM base as runtime
 RUN useradd -m myuser
 USER myuser
-CMD ["waitress-serve", "src.appdash.main:server", "--port=${PORT}"]
+CMD ["waitress-serve", "src.appdash.main:server"]
