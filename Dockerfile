@@ -12,8 +12,7 @@ ADD . /app/
 #RUN rm -fr .tox && tox -r
 
 FROM base as runtime
-
 RUN useradd -m myuser
 USER myuser
-ARG port=${PORT}
-CMD waitress-serve --port=$port src.appdash.main:server
+ENV PORT=5000
+CMD waitress-serve --port=$PORT src.appdash.main:server
