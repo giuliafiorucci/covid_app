@@ -36,7 +36,7 @@ app = dash.Dash(
 app.title = "Visualise Stuff"
 
 
-MAPBOX_API_KEY = os.getenv("MAPBOX_TOKEN", None)
+MAPBOX_API_KEY = None#os.getenv("MAPBOX_TOKEN", None)
 
 # fig = px.choropleth_mapbox(
 #     df,
