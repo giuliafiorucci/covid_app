@@ -12,5 +12,4 @@ ADD . /app/
 #RUN rm -fr .tox && tox -r
 
 FROM base as runtime
-EXPOSE 5000
-CMD ["python", "-m", "src.appdash.main"]
+CMD ["waitress-serve", "src.appdash.main:server"]
