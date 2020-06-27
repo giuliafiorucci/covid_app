@@ -1,0 +1,12 @@
+dash
+dash-renderer
+dash-daq
+flask
+plotly
+numpy
+pandas
+scikit-learn
+matplotlib
+seaborn
+requests
+descartes

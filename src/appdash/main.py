@@ -2,9 +2,12 @@ import dash
 import numpy as np
 import os
 import flask
+import plotly.graph_objects as go
 
-from src.appdash.predictions import mtcars, preds, make_fit
-from src.appdash.layouts import layout_centered
+# import plotly.express as px
+
+from src.appdash.predictions import df, regions
+from src.appdash.layouts import make_layout_centered
 
 
 """
@@ -30,61 +33,54 @@ app = dash.Dash(
     external_stylesheets=external_stylesheets,
     server=server,
 )
-app.title = "Predicting MPG"
-app.layout = layout_centered
+app.title = "Visualise Stuff"
 
 
-# callback will watch for changes in inputs and re-execute when any
-# changes are detected.
-@app.callback(
-    dash.dependencies.Output("output-prediction", "children"),
-    [
-        dash.dependencies.Input("input-disp", "value"),
-        dash.dependencies.Input("input-qsec", "value"),
-        dash.dependencies.Input("input-cyl", "value"),
-        dash.dependencies.Input("input-am", "on"),
-    ],
+MAPBOX_API_KEY = os.getenv("MAPBOX_TOKEN", None)
+
+# fig = px.choropleth_mapbox(
+#     df,
+#     geojson=regions,
+#     locations="COD_REG",
+#     featureidkey="properties.COD_REG",
+#     color="val",
+#     color_continuous_scale="Viridis",
+# )
+
+fig = go.Figure(
+    data=[
+        go.Choroplethmapbox(
+            geojson=regions,
+            colorscale="viridis",
+            featureidkey="properties.COD_REG",
+            locations=df["COD_REG"].astype(str),
+            z=df["val"].astype(float),
+        )
+    ]
 )
-def callback_pred(disp: float, qsec: float, cyl: str, am: bool) -> str:
-    """Pass values from the UI on to our prediction function defined in
-    predictions.py.
 
-    Parameters
-    ----------
-    disp
-    qsec
-    cyl
-    am
-
-    Returns
-    -------
-    None
-    """
-    fit, cyl_enc = make_fit(mtcars)
-    pred = preds(
-        fit=fit, cyl_enc=cyl_enc, disp=disp, qsec=qsec, am=np.float64(am), cyl=cyl
-    )
-    # return a string that will be rendered in the UI
-    return "Predicted MPG: {}".format(pred)
-
-
-@app.callback(
-    dash.dependencies.Output("my-graph", "figure"),
-    [dash.dependencies.Input("my-dropdown", "value")],
+custom_layout = dict(
+    title="Covid Data",
+    autosize=False,
+    width=700,
+    height=800,
+    hovermode="closest",
+    hoverdistance=30,
+    mapbox=dict(
+        accesstoken=MAPBOX_API_KEY,
+        bearing=0,
+        center=dict(lat=41.871941, lon=12.567380),  # the centre of Italy
+        pitch=0,
+        zoom=4.9,
+        style="light",
+    ),
 )
-def update_graph(selected_dropdown_value):
-    if selected_dropdown_value == "LINEAR":
-        return {
-            "data": [{"x": mtcars.index, "y": mtcars.disp}],
-            "layout": {"margin": {"l": 200, "r": 200, "t": 20, "b": 30}},
-        }
-    else:
-        return {
-            "data": [{"x": mtcars.index, "y": np.log(mtcars.disp)}],
-            "layout": {"margin": {"l": 200, "r": 200, "t": 20, "b": 30}},
-        }
+fig.update_layout(custom_layout)
+
+
+app.layout = make_layout_centered(fig)
 
 
 # for running the app
 if __name__ == "__main__":
-    app.server.run(debug=True, threaded=True)
+    app.server.run(debug=True)
