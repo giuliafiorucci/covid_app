@@ -1,3 +1,5 @@
 build:
+  config:
+    PORT=${PORT}
   docker:
     web: Dockerfile
