@@ -8,6 +8,7 @@ import plotly.graph_objects as go
 
 from src.appdash.predictions import df, regions
 from src.appdash.layouts import make_layout_centered
+from src.appdash.constants import PROJECT_DIR
 
 
 """
@@ -35,7 +36,7 @@ app = dash.Dash(
 )
 app.title = "Visualise Stuff"
 
-with open(".mapbox_token", "r") as mapbox_file:
+with open(PROJECT_DIR / ".mapbox_token", "r") as mapbox_file:
     MAPBOX_API_KEY = mapbox_file.read()
 
 # fig = px.choropleth_mapbox(
@@ -83,4 +84,6 @@ app.layout = make_layout_centered(fig)
 
 # for running the app
 if __name__ == "__main__":
-    app.server.run(host="0.0.0.0")
+    # app.server.run(debug=True) # development
+    # app.server.run(host="0.0.0.0") # production
+    app.server.run()  # production
