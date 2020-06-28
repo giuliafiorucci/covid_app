@@ -15,6 +15,7 @@
 - https://stackoverflow.com/questions/11087682/does-gunicorn-run-on-windows
 - https://stackoverflow.com/questions/45124711/why-cant-i-connect-to-my-local-docker-compose-container-on-windows-10
 - https://dev.to/riverfount/dockerize-a-flask-app-17ag
+- https://vsupalov.com/docker-arg-env-variable-guide/
 
 ## Plotly and Geopandas
 - https://plotly.com/python/choropleth-maps/
