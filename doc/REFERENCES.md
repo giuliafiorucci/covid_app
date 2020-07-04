@@ -57,3 +57,18 @@
 - https://docs.bokeh.org/en/latest/docs/gallery/texas.html
 - https://www.activestate.com/blog/dash-vs-bokeh/
 - https://docs.bokeh.org/en/latest/docs/user_guide/server.html
+
+## OpenStreetMap
+- https://towardsdatascience.com/loading-data-from-openstreetmap-with-python-and-the-overpass-api-513882a27fd0
+
+## Dash Examples, Templates
+- https://dash-gallery.plotly.host/Portal/
+- https://alysivji.github.io/reactive-dashboards-with-dash.html
+- https://medium.com/a-r-g-o/using-plotlys-dash-to-deliver-public-sector-decision-support-dashboards-ac863fa829fb
+- https://github.com/plotly/dash-sample-apps/tree/master/apps/dash-oil-and-gas
+- https://dash-bootstrap-components.opensource.faculty.ai/
+- https://github.com/ucg8j/awesome-dash
+
+- https://dash-gallery.plotly.host/dash-uber-rides-demo/
+- https://dash-gallery.plotly.host/dashr-uber-rasterizer/
+- https://dash-gallery.plotly.host/dash-spatial-clustering/
