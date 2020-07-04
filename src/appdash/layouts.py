@@ -24,6 +24,202 @@ def make_layout_centered(go_figure):
     return make_centered_div([dcc.Graph(figure=go_figure)])
 
 
+def make_oil_gas_layout(dash_app):
+    return html.Div(
+        [
+            dcc.Store(id="aggregate_data"),
+            # empty Div to trigger javascript file for graph resizing
+            html.Div(id="output-clientside"),
+            html.Div(
+                [
+                    html.Div(
+                        [
+                            html.Img(
+                                src=dash_app.get_asset_url("dash-logo.png"),
+                                id="plotly-image",
+                                style={
+                                    "height": "60px",
+                                    "width": "auto",
+                                    "margin-bottom": "25px",
+                                },
+                            )
+                        ],
+                        className="one-third column",
+                    ),
+                    html.Div(
+                        [
+                            html.Div(
+                                [
+                                    html.H3(
+                                        "New York Oil and Gas",
+                                        style={"margin-bottom": "0px"},
+                                    ),
+                                    html.H5(
+                                        "Production Overview",
+                                        style={"margin-top": "0px"},
+                                    ),
+                                ]
+                            )
+                        ],
+                        className="one-half column",
+                        id="title",
+                    ),
+                    html.Div(
+                        [
+                            html.A(
+                                html.Button("Learn More", id="learn-more-button"),
+                                href="https://plot.ly/dash/pricing/",
+                            )
+                        ],
+                        className="one-third column",
+                        id="button",
+                    ),
+                ],
+                id="header",
+                className="row flex-display",
+                style={"margin-bottom": "25px"},
+            ),
+            html.Div(
+                [
+                    html.Div(
+                        [
+                            html.P(
+                                "Filter by construction date (or select range in histogram):",
+                                className="control_label",
+                            ),
+                            dcc.RangeSlider(
+                                id="year_slider",
+                                min=1960,
+                                max=2017,
+                                value=[1990, 2010],
+                                className="dcc_control",
+                            ),
+                            html.P("Filter by well status:", className="control_label"),
+                            dcc.RadioItems(
+                                id="well_status_selector",
+                                options=[
+                                    {"label": "All ", "value": "all"},
+                                    {"label": "Active only ", "value": "active"},
+                                    {"label": "Customize ", "value": "custom"},
+                                ],
+                                value="active",
+                                labelStyle={"display": "inline-block"},
+                                className="dcc_control",
+                            ),
+                            dcc.Dropdown(
+                                id="well_statuses",
+                                options=["on", "off"],
+                                multi=True,
+                                value=["a", "b"],
+                                className="dcc_control",
+                            ),
+                            dcc.Checklist(
+                                id="lock_selector",
+                                options=[{"label": "Lock camera", "value": "locked"}],
+                                className="dcc_control",
+                                value=[],
+                            ),
+                            html.P("Filter by well type:", className="control_label"),
+                            dcc.RadioItems(
+                                id="well_type_selector",
+                                options=[
+                                    {"label": "All ", "value": "all"},
+                                    {
+                                        "label": "Productive only ",
+                                        "value": "productive",
+                                    },
+                                    {"label": "Customize ", "value": "custom"},
+                                ],
+                                value="productive",
+                                labelStyle={"display": "inline-block"},
+                                className="dcc_control",
+                            ),
+                            dcc.Dropdown(
+                                id="well_types",
+                                options=["on", "off"],
+                                multi=True,
+                                value=["a", "b"],
+                                className="dcc_control",
+                            ),
+                        ],
+                        className="pretty_container four columns",
+                        id="cross-filter-options",
+                    ),
+                    html.Div(
+                        [
+                            html.Div(
+                                [
+                                    html.Div(
+                                        [
+                                            html.H6(id="well_text"),
+                                            html.P("No. of Wells"),
+                                        ],
+                                        id="wells",
+                                        className="mini_container",
+                                    ),
+                                    html.Div(
+                                        [html.H6(id="gasText"), html.P("Gas")],
+                                        id="gas",
+                                        className="mini_container",
+                                    ),
+                                    html.Div(
+                                        [html.H6(id="oilText"), html.P("Oil")],
+                                        id="oil",
+                                        className="mini_container",
+                                    ),
+                                    html.Div(
+                                        [html.H6(id="waterText"), html.P("Water")],
+                                        id="water",
+                                        className="mini_container",
+                                    ),
+                                ],
+                                id="info-container",
+                                className="row container-display",
+                            ),
+                            html.Div(
+                                [dcc.Graph(id="count_graph")],
+                                id="countGraphContainer",
+                                className="pretty_container",
+                            ),
+                        ],
+                        id="right-column",
+                        className="eight columns",
+                    ),
+                ],
+                className="row flex-display",
+            ),
+            html.Div(
+                [
+                    html.Div(
+                        [dcc.Graph(id="main_graph")],
+                        className="pretty_container seven columns",
+                    ),
+                    html.Div(
+                        [dcc.Graph(id="individual_graph")],
+                        className="pretty_container five columns",
+                    ),
+                ],
+                className="row flex-display",
+            ),
+            html.Div(
+                [
+                    html.Div(
+                        [dcc.Graph(id="pie_graph")],
+                        className="pretty_container seven columns",
+                    ),
+                    html.Div(
+                        [dcc.Graph(id="aggregate_graph")],
+                        className="pretty_container five columns",
+                    ),
+                ],
+                className="row flex-display",
+            ),
+        ],
+        id="mainContainer",
+        style={"display": "flex", "flex-direction": "column"},
+    )
+
+
 # I compute these up front to avoid having to
 # calculate thes twice
 unq_cyl = np.sort(mtcars["cyl"].unique().astype(int)).astype(str)

@@ -7,7 +7,7 @@ import plotly.graph_objects as go
 # import plotly.express as px
 
 from src.appdash.predictions import df, regions
-from src.appdash.layouts import make_layout_centered
+from src.appdash.layouts import make_layout_centered, make_oil_gas_layout
 from src.appdash.constants import PROJECT_DIR
 
 
@@ -24,37 +24,13 @@ server = flask.Flask(__name__)
 server.secret_key = os.environ.get("secret_key", str(np.random.randint(0, 1000000)))
 
 # create an instance of a dash app
-app = dash.Dash(
-    __name__,
-    server=server,
-)
+app = dash.Dash(__name__, server=server,assets_folder=PROJECT_DIR.joinpath("assets"))
 app.title = "Visualise Stuff"
 
 with open(PROJECT_DIR / ".mapbox_token", "r") as mapbox_file:
     MAPBOX_API_KEY = mapbox_file.read()
 
-# fig = px.choropleth_mapbox(
-#     df,
-#     geojson=regions,
-#     locations="COD_REG",
-#     featureidkey="properties.COD_REG",
-#     color="val",
-#     color_continuous_scale="Viridis",
-# )
-
-fig = go.Figure(
-    data=[
-        go.Choroplethmapbox(
-            geojson=regions,
-            colorscale="viridis",
-            featureidkey="properties.COD_REG",
-            locations=df["COD_REG"].astype(str),
-            z=df["val"].astype(float),
-        )
-    ]
-)
-
-custom_layout = dict(
+choropleth_layout = dict(
     title="Covid Data",
     autosize=False,
     width=700,
@@ -70,10 +46,23 @@ custom_layout = dict(
         style="light",
     ),
 )
-fig.update_layout(custom_layout)
+
+fig = go.Figure(
+    data=[
+        go.Choroplethmapbox(
+            geojson=regions,
+            colorscale="viridis",
+            featureidkey="properties.COD_REG",
+            locations=df["COD_REG"].astype(str),
+            z=df["val"].astype(float),
+        )
+    ],
+    layout=choropleth_layout,
+)
 
 
-app.layout = make_layout_centered(fig)
+# app.layout = make_layout_centered(fig)
+app.layout = make_oil_gas_layout(app)
 
 
 # for running the app
