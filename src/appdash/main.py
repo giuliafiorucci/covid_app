@@ -14,10 +14,6 @@ from src.appdash.constants import PROJECT_DIR
 """
 # Setup the app
 # the template is configured to execute 'server' on 'src/main.py'
-
-dash apps are unstyled by default
-external CSS stylesheets
-https://dash.plotly.com/external-resources
 """
 
 server = flask.Flask(__name__)
@@ -62,7 +58,7 @@ fig = go.Figure(
 
 
 # app.layout = make_layout_centered(fig)
-app.layout = make_oil_gas_layout(app)
+app.layout = make_oil_gas_layout(app, fig)
 
 
 # for running the app

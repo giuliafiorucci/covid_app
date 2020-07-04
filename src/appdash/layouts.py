@@ -24,7 +24,7 @@ def make_layout_centered(go_figure):
     return make_centered_div([dcc.Graph(figure=go_figure)])
 
 
-def make_oil_gas_layout(dash_app):
+def make_oil_gas_layout(dash_app, go_figure):
     return html.Div(
         [
             dcc.Store(id="aggregate_data"),
@@ -32,6 +32,24 @@ def make_oil_gas_layout(dash_app):
             html.Div(id="output-clientside"),
             html.Div(
                 [
+                    html.Div(
+                        [
+                            html.Div(
+                                [
+                                    html.H3(
+                                        "COVID-19 Dashboard",
+                                        style={"margin-bottom": "0px"},
+                                    ),
+                                    html.H5(
+                                        "Regional Overview",
+                                        style={"margin-top": "0px"},
+                                    ),
+                                ]
+                            )
+                        ],
+                        className="eight columns",
+                        id="title",
+                    ),
                     html.Div(
                         [
                             html.Img(
@@ -44,35 +62,7 @@ def make_oil_gas_layout(dash_app):
                                 },
                             )
                         ],
-                        className="one-third column",
-                    ),
-                    html.Div(
-                        [
-                            html.Div(
-                                [
-                                    html.H3(
-                                        "New York Oil and Gas",
-                                        style={"margin-bottom": "0px"},
-                                    ),
-                                    html.H5(
-                                        "Production Overview",
-                                        style={"margin-top": "0px"},
-                                    ),
-                                ]
-                            )
-                        ],
-                        className="one-half column",
-                        id="title",
-                    ),
-                    html.Div(
-                        [
-                            html.A(
-                                html.Button("Learn More", id="learn-more-button"),
-                                href="https://plot.ly/dash/pricing/",
-                            )
-                        ],
-                        className="one-third column",
-                        id="button",
+                        className="one column",
                     ),
                 ],
                 id="header",
@@ -191,7 +181,7 @@ def make_oil_gas_layout(dash_app):
             html.Div(
                 [
                     html.Div(
-                        [dcc.Graph(id="main_graph")],
+                        [dcc.Graph(figure=go_figure, id="main_graph")],
                         className="pretty_container seven columns",
                     ),
                     html.Div(
