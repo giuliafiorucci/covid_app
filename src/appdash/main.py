@@ -23,15 +23,9 @@ https://dash.plotly.com/external-resources
 server = flask.Flask(__name__)
 server.secret_key = os.environ.get("secret_key", str(np.random.randint(0, 1000000)))
 
-external_stylesheets = [
-    "https://codepen.io/chriddyp/pen/bWLwgP.css",
-]
-
 # create an instance of a dash app
 app = dash.Dash(
     __name__,
-    external_scripts=None,
-    external_stylesheets=external_stylesheets,
     server=server,
 )
 app.title = "Visualise Stuff"
