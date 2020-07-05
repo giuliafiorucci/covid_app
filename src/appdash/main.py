@@ -7,7 +7,11 @@ import plotly.graph_objects as go
 # import plotly.express as px
 
 from src.appdash.predictions import df, regions
-from src.appdash.layouts import make_layout_centered, make_oil_gas_layout
+from src.appdash.layouts import (
+    make_layout_centered,
+    make_oil_gas_layout,
+    make_new_template,
+)
 from src.appdash.constants import PROJECT_DIR
 
 
@@ -19,8 +23,15 @@ from src.appdash.constants import PROJECT_DIR
 server = flask.Flask(__name__)
 server.secret_key = os.environ.get("secret_key", str(np.random.randint(0, 1000000)))
 
+# external_stylesheets = [
+#     "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css",
+# ]
+
 # create an instance of a dash app
-app = dash.Dash(__name__, server=server,assets_folder=PROJECT_DIR.joinpath("assets"))
+app = dash.Dash(__name__,
+                server=server,
+                # external_stylesheets=external_stylesheets)
+                assets_folder=PROJECT_DIR.joinpath("assets"))
 app.title = "Visualise Stuff"
 
 with open(PROJECT_DIR / ".mapbox_token", "r") as mapbox_file:
@@ -58,7 +69,8 @@ fig = go.Figure(
 
 
 # app.layout = make_layout_centered(fig)
-app.layout = make_oil_gas_layout(app, fig)
+# app.layout = make_oil_gas_layout(app, fig)
+app.layout = make_new_template(app, fig)
 
 
 # for running the app
