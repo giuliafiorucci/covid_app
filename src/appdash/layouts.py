@@ -52,7 +52,6 @@ def make_oil_gas_layout(dash_app, go_figure):
                         className="four columns",
                     ),
                 ],
-                # id="header",
                 className="row flex-display",
                 style={"margin-bottom": "25px"},
             ),
