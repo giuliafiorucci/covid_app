@@ -28,10 +28,12 @@ server.secret_key = os.environ.get("secret_key", str(np.random.randint(0, 100000
 # ]
 
 # create an instance of a dash app
-app = dash.Dash(__name__,
-                server=server,
-                # external_stylesheets=external_stylesheets)
-                assets_folder=PROJECT_DIR.joinpath("assets"))
+app = dash.Dash(
+    __name__,
+    server=server,
+    # external_stylesheets=external_stylesheets)
+    assets_folder=PROJECT_DIR.joinpath("assets"),
+)
 app.title = "Visualise Stuff"
 
 with open(PROJECT_DIR / ".mapbox_token", "r") as mapbox_file:
@@ -69,10 +71,10 @@ fig = go.Figure(
 
 
 # app.layout = make_layout_centered(fig)
-# app.layout = make_oil_gas_layout(app, fig)
-app.layout = make_new_template(app, fig)
+app.layout = make_oil_gas_layout(app, fig)
+# app.layout = make_new_template(app, fig)
 
 
 # for running the app
 if __name__ == "__main__":
-    app.server.run()  # production
+    app.server.run(debug=True)  # production

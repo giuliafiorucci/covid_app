@@ -34,40 +34,25 @@ def make_oil_gas_layout(dash_app, go_figure):
             html.Div(
                 [
                     html.Div(
-                        [
-                            html.Div(
-                                [
-                                    html.H3(
-                                        "COVID-19 Dashboard",
-                                        style={"margin-bottom": "0px"},
-                                    ),
-                                    html.H5(
-                                        "Regional Overview",
-                                        style={"margin-top": "0px"},
-                                    ),
-                                ]
-                            )
-                        ],
+                        [html.H2("COVID-19 Dashboard - Regional Overview",)],
                         className="eight columns",
                         id="title",
                     ),
                     html.Div(
                         [
                             html.Img(
-                                # src=dash_app.get_asset_url("dash-logo.png"),
-                                src=PROJECT_DIR.joinpath("assets/dash-logo.png"),
-                                id="plotly-image",
+                                src=dash_app.get_asset_url("dash-logo.png"),
                                 style={
                                     "height": "60px",
                                     "width": "auto",
-                                    "margin-bottom": "25px",
+                                    "float": "right",
                                 },
                             )
                         ],
-                        className="one column",
+                        className="four columns",
                     ),
                 ],
-                id="header",
+                # id="header",
                 className="row flex-display",
                 style={"margin-bottom": "25px"},
             ),
@@ -208,15 +193,23 @@ def make_oil_gas_layout(dash_app, go_figure):
             ),
         ],
         id="mainContainer",
-        style={"display": "flex", "flex-direction": "column"},
     )
 
 
 def make_new_template(dash_app, go_figure):
-    return html.Div([html.Div([
-        html.Div("item1", className="p-2"),
-        html.Div("item2", className="p-2"),
-    ], className="d-flex flex-row justify-content-between")], className="container", style={"flex-direction": "column"})
+    return html.Div(
+        [
+            html.Div(
+                [
+                    html.Div("item1", className="p-2"),
+                    html.Div("item2", className="p-2"),
+                ],
+                className="d-flex flex-row justify-content-between",
+            )
+        ],
+        className="container",
+        style={"flex-direction": "column"},
+    )
 
 
 # I compute these up front to avoid having to
