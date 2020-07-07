@@ -70,7 +70,6 @@ fig = go.Figure(
 )
 
 
-# app.layout = make_layout_centered(fig)
 app.layout = make_oil_gas_layout(app, fig)
 # app.layout = make_new_template(app, fig)
 
