@@ -48,6 +48,10 @@ def get_layout_header(dash_app):
 
 
 def get_layout_controls():
+    """
+    Layout of the controls
+    |Regions|Date Range|choropleth property: cumulative deaths-extracted R0|
+    """
     return (
         html.Div(
             [
